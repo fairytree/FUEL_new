@@ -7,6 +7,10 @@
 #include <exploration_manager/expl_data.h>
 #include <plan_env/edt_environment.h>
 #include <plan_env/sdf_map.h>
+#include <std_msgs/Float64.h> 
+
+#include "bspline/NextPosAndYaw.h"
+
 
 using Eigen::Vector4d;
 
@@ -45,10 +49,12 @@ void FastExplorationFSM::init(ros::NodeHandle& nh) {
   replan_pub_ = nh.advertise<std_msgs::Empty>("/planning/replan", 10);
   new_pub_ = nh.advertise<std_msgs::Empty>("/planning/new", 10);
   bspline_pub_ = nh.advertise<bspline::Bspline>("/planning/bspline", 10);
+  next_pos_and_yaw_pub_ = nh.advertise<bspline::NextPosAndYaw>("/planning/next_pos_and_yaw", 10);
 }
 
+//!!!
 void FastExplorationFSM::FSMCallback(const ros::TimerEvent& e) {
-  ROS_INFO_STREAM_THROTTLE(1.0, "[FSM]: state: " << fd_->state_str_[int(state_)]);
+  // ROS_INFO_STREAM_THROTTLE(1.0, "[FSM]: state: " << fd_->state_str_[int(state_)]);
 
   switch (state_) {
     case INIT: {
@@ -116,6 +122,12 @@ void FastExplorationFSM::FSMCallback(const ros::TimerEvent& e) {
       double dt = (ros::Time::now() - fd_->newest_traj_.start_time).toSec();
       if (dt > 0) {
         bspline_pub_.publish(fd_->newest_traj_);
+
+        std::cout << "next pos_x: " << planner_manager_->next_pos_and_yaw_.position.x << std::endl;
+        std::cout << "next pos_y: " << planner_manager_->next_pos_and_yaw_.position.y << std::endl;
+        std::cout << "next pos_z: " << planner_manager_->next_pos_and_yaw_.position.z << std::endl;
+        std::cout << "next yaw: " << planner_manager_->next_pos_and_yaw_.yaw << std::endl;
+        next_pos_and_yaw_pub_.publish(planner_manager_->next_pos_and_yaw_);
         fd_->static_state_ = false;
         transitState(EXEC_TRAJ, "FSM");
 
@@ -152,6 +164,7 @@ void FastExplorationFSM::FSMCallback(const ros::TimerEvent& e) {
   }
 }
 
+//!!!
 int FastExplorationFSM::callExplorationPlanner() {
   ros::Time time_r = ros::Time::now() + ros::Duration(fp_->replan_time_);
 

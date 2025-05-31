@@ -69,11 +69,11 @@ struct vector_space_reduce<point3D> {
   template <class Value, class Op>
   Value operator()(const point3D& p, Op op, Value init) {
     init = op(init, p.x);
-    // std::cout << init << " ";
+    // //std::cout << init << " ";
     init = op(init, p.y);
-    // std::cout << init << " ";
+    // //std::cout << init << " ";
     init = op(init, p.z);
-    // std::cout << init << std::endl;
+    // //std::cout << init << std::endl;
     return init;
   }
 };
@@ -106,7 +106,7 @@ int main() {
   // point type defines it's own operators -> use vector_space_algebra !
   typedef runge_kutta_dopri5<point3D, double, point3D, double, vector_space_algebra> stepper;
   int steps = integrate_adaptive(make_controlled<stepper>(1E-10, 1E-10), lorenz, x, 0.0, 10.0, 0.1);
-  std::cout << x << std::endl;
-  std::cout << "steps: " << steps << std::endl;
+  //std::cout << x << std::endl;
+  //std::cout << "steps: " << steps << std::endl;
 }
 //]

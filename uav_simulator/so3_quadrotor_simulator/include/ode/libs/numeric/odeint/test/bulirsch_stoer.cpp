@@ -86,11 +86,11 @@ BOOST_AUTO_TEST_CASE(test_bulirsch_stoer) {
 
   // stepper.try_step( lorenz() , x , t , dt );
 
-  std::cout << "starting integration..." << std::endl;
+  //std::cout << "starting integration..." << std::endl;
 
   size_t steps = integrate_adaptive(stepper, lorenz(), x, 0.0, 10.0, dt);
 
-  std::cout << "required steps: " << steps << std::endl;
+  //std::cout << "required steps: " << steps << std::endl;
 
   bulirsch_stoer_dense_out<state_type> bs_do(1E-9, 1E-9, 1.0, 0.0);
   x[0] = 10.0;
@@ -100,18 +100,18 @@ BOOST_AUTO_TEST_CASE(test_bulirsch_stoer) {
   dt = 1E-1;
   bs_do.initialize(x, t, dt);
   bs_do.do_step(sin_system());
-  std::cout << "one step successful, new time: " << bs_do.current_time() << " (" << t << ")"
+  //std::cout << "one step successful, new time: " << bs_do.current_time() << " (" << t << ")"
             << std::endl;
 
   x = bs_do.current_state();
-  std::cout << "x( " << bs_do.current_time() << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
+  //std::cout << "x( " << bs_do.current_time() << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
             << " ]" << std::endl;
 
   bs_do.calc_state(bs_do.current_time() / 3, x);
-  std::cout << "x( " << bs_do.current_time() / 3 << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
+  //std::cout << "x( " << bs_do.current_time() / 3 << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
             << " ]" << std::endl;
 
-  std::cout << std::endl
+  //std::cout << std::endl
             << "=======================================================================" << std::endl
             << std::endl;
 
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_CASE(test_bulirsch_stoer) {
   bs_do.initialize(x, t, dt);
   bs_do.do_step(sin_system());
   x = bs_do.current_state();
-  std::cout << "x( " << bs_do.current_time() << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
+  //std::cout << "x( " << bs_do.current_time() << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
             << " ]" << std::endl;
 
   t = dt;
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(test_bulirsch_stoer) {
   bs_do.do_step(sin_system());
   x = bs_do.current_state();
 
-  std::cout << "x( " << bs_do.current_time() << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
+  //std::cout << "x( " << bs_do.current_time() << " ) = [ " << x[0] << " , " << x[1] << " , " << x[2]
             << " ]" << std::endl;
 }
 

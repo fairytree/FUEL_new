@@ -1,5 +1,6 @@
 <launch>
-  <!-- size of map, change the size in x, y, z according to your application -->
+
+    <!-- size of map, change the size in x, y, z according to your application -->
   <arg name="map_size_x" value="50.0"/>
   <arg name="map_size_y" value="50.0"/>
   <arg name="map_size_z" value=" 10.0"/>
@@ -44,9 +45,17 @@
     <arg name="max_vel" value="2.0" />
     <arg name="max_acc" value="2.0" />
   </include>
+  
 
+  <!-- controller manager -->
+  <node pkg="controller_manager" name="controller_manager" type="controller_manager" output="log">
+
+  <param name="controller_manager/control_freq" value="10" type="double"/>
+
+  </node>
+  
   <!-- trajectory server -->
-  <node pkg="plan_manage" name="traj_server" type="traj_server" output="screen">
+  <node pkg="plan_manage" name="traj_server" type="traj_server" output="log">
     <remap from="/position_cmd" to="planning/pos_cmd"/>
 
     <remap from="/odom_world" to="$(arg odom_topic)"/>
@@ -65,7 +74,7 @@
 
   </node>
 
-  <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator" output="screen">
+  <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator" output="log">
     <remap from="~odom" to="$(arg odom_topic)"/>        
     <remap from="~goal" to="/move_base_simple/goal"/>
     <remap from="~traj_start_trigger" to="/traj_start_trigger" />

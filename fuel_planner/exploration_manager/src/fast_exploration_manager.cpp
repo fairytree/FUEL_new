@@ -18,6 +18,7 @@
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <visualization_msgs/Marker.h>
+#include <std_msgs/Float64.h>
 
 using namespace Eigen;
 
@@ -85,6 +86,7 @@ void FastExplorationManager::initialize(ros::NodeHandle& nh) {
   // fout.close();
 }
 
+//!!!
 int FastExplorationManager::planExploreMotion(
     const Vector3d& pos, const Vector3d& vel, const Vector3d& acc, const Vector3d& yaw) {
   ros::Time t1 = ros::Time::now();
@@ -92,8 +94,8 @@ int FastExplorationManager::planExploreMotion(
   ed_->views_.clear();
   ed_->global_tour_.clear();
 
-  std::cout << "start pos: " << pos.transpose() << ", vel: " << vel.transpose()
-            << ", acc: " << acc.transpose() << std::endl;
+  //std::cout << "start pos: " << pos.transpose() << ", vel: " << vel.transpose()
+            // << ", acc: " << acc.transpose() << std::endl;
 
   // Search frontiers and group them into clusters
   frontier_finder_->searchFrontiers();
@@ -221,7 +223,15 @@ int FastExplorationManager::planExploreMotion(
   } else
     ROS_ERROR("Empty destination.");
 
-  std::cout << "Next view: " << next_pos.transpose() << ", " << next_yaw << std::endl;
+  //!!!
+  std::cout << "next pos: " << next_pos << std::endl;
+  std::cout << "yaw: " << next_yaw << "END YAW\n" << std::endl;
+  planner_manager_->next_pos_and_yaw_.position.x = next_pos(0);
+  planner_manager_->next_pos_and_yaw_.position.y = next_pos(1);
+  planner_manager_->next_pos_and_yaw_.position.z = next_pos(2);
+  planner_manager_->next_pos_and_yaw_.yaw = next_yaw;
+
+  //std::cout << "Next view: " << next_pos.transpose() << ", " << next_yaw << std::endl;
 
   // Plan trajectory (position and yaw) to the next viewpoint
   t1 = ros::Time::now();
@@ -251,7 +261,7 @@ int FastExplorationManager::planExploreMotion(
   } else if (len > radius_far) {
     // Next viewpoint is far away, select intermediate goal on geometric path (this also deal with
     // dead end)
-    std::cout << "Far goal." << std::endl;
+    //std::cout << "Far goal." << std::endl;
     double len2 = 0.0;
     vector<Eigen::Vector3d> truncated_path = { ed_->path_next_goal_.front() };
     for (int i = 1; i < ed_->path_next_goal_.size() && len2 < radius_far; ++i) {
@@ -267,7 +277,7 @@ int FastExplorationManager::planExploreMotion(
     // ed_->kino_path_ = planner_manager_->kino_path_finder_->getKinoTraj(0.02);
   } else {
     // Search kino path to exactly next viewpoint and optimize
-    std::cout << "Mid goal" << std::endl;
+    //std::cout << "Mid goal" << std::endl;
     ed_->next_goal_ = next_pos;
 
     if (!planner_manager_->kinodynamicReplan(
@@ -445,7 +455,7 @@ void FastExplorationManager::refineLocalTour(
   ViewNode::Ptr final_node;
 
   // Add viewpoints
-  std::cout << "Local tour graph: ";
+  //std::cout << "Local tour graph: ";
   for (int i = 0; i < n_points.size(); ++i) {
     // Create nodes for viewpoints of one frontier
     for (int j = 0; j < n_points[i].size(); ++j) {
@@ -463,11 +473,11 @@ void FastExplorationManager::refineLocalTour(
       }
     }
     // Store nodes for this group for connecting edges
-    std::cout << cur_group.size() << ", ";
+    //std::cout << cur_group.size() << ", ";
     last_group = cur_group;
     cur_group.clear();
   }
-  std::cout << "" << std::endl;
+  //std::cout << "" << std::endl;
   create_time = (ros::Time::now() - t1).toSec();
   t1 = ros::Time::now();
 

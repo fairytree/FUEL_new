@@ -335,7 +335,7 @@ int main(int argc, char** argv)
   {
     seed = rd() % INT32_MAX;
   }
-  std::cout << "map seed: " << seed << std::endl;
+  //std::cout << "map seed: " << seed << std::endl;
 
   eng = default_random_engine(seed);
 

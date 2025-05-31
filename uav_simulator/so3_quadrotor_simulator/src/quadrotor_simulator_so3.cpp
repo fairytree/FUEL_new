@@ -138,6 +138,7 @@ static Control getControl(const QuadrotorSimulator::Quadrotor& quad, const Comma
   return control;
 }
 
+//!!!
 static void cmd_callback(const quadrotor_msgs::SO3Command::ConstPtr& cmd) {
   command.force[0] = cmd->force.x;
   command.force[1] = cmd->force.y;

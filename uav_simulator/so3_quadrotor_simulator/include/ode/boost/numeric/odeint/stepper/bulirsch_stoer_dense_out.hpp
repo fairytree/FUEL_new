@@ -154,7 +154,7 @@ public:
     m_k_final = 0;
     time_type new_h = dt;
 
-    // std::cout << "t=" << t <<", dt=" << dt << ", k_opt=" << m_current_k_opt << ", first: " << m_first
+    // //std::cout << "t=" << t <<", dt=" << dt << ", k_opt=" << m_current_k_opt << ", first: " << m_first
     // << std::endl;
 
     for (size_t k = 0; k <= m_current_k_opt + 1; k++) {

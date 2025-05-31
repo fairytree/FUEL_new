@@ -434,6 +434,9 @@ void test() {
 }
 
 int main(int argc, char** argv) {
+  
+  ROS_INFO("****************I am traj_server_node ****************");
+
   ros::init(argc, argv, "traj_server");
   ros::NodeHandle node;
   ros::NodeHandle nh("~");
@@ -467,8 +470,8 @@ int main(int argc, char** argv) {
   cmd.kx = { 5.7, 5.7, 6.2 };
   cmd.kv = { 3.4, 3.4, 4.0 };
 
-  std::cout << start_time.toSec() << std::endl;
-  std::cout << end_time.toSec() << std::endl;
+  //std::cout << start_time.toSec() << std::endl;
+  //std::cout << end_time.toSec() << std::endl;
 
   cmd.header.stamp = ros::Time::now();
   cmd.header.frame_id = "world";

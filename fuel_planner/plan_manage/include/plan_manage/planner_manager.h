@@ -3,6 +3,7 @@
 
 #include <bspline_opt/bspline_optimizer.h>
 #include <bspline/non_uniform_bspline.h>
+#include <bspline/NextPosAndYaw.h>  
 
 #include <path_searching/astar2.h>
 #include <path_searching/kinodynamic_astar.h>
@@ -53,6 +54,7 @@ public:
   EDTEnvironment::Ptr edt_environment_;
   unique_ptr<Astar> path_finder_;
   unique_ptr<TopologyPRM> topo_prm_;
+  bspline::NextPosAndYaw next_pos_and_yaw_;
 
 private:
   /* main planning algorithms & modules */

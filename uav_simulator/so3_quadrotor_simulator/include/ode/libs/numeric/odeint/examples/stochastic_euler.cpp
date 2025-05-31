@@ -112,7 +112,7 @@ struct ornstein_stoch {
 struct streaming_observer {
   template <class State>
   void operator()(const State& x, double t) const {
-    std::cout << t << "\t" << x[0] << "\n";
+    //std::cout << t << "\t" << x[0] << "\n";
   }
 };
 

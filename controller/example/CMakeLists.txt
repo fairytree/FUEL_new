@@ -1,0 +1,3 @@
+add_executable(controller_example controller_example.cpp)
+
+target_link_libraries(controller_example controller)

@@ -94,7 +94,7 @@ struct lorenz
 
     void obs( const state_type &x , double t ) const
     {
-        std::cout << t << " " << x[0] << " " << x[1] << " " << x[2] << "\n";
+        //std::cout << t << " " << x[0] << " " << x[1] << " " << x[2] << "\n";
     }
 };
 

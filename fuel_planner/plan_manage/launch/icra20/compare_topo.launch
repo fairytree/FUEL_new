@@ -5,7 +5,7 @@
   <arg name="dynamic" value="0" />
 
   <!-- main node -->
-  <node pkg="plan_manage" name="compare_topo" type="compare_topo" output="screen">
+  <node pkg="plan_manage" name="compare_topo" type="compare_topo" output="log">
   
     <param name="sdf_map/resolution"      value="0.1" /> 
     <param name="sdf_map/global/x_size"   value="40.0" /> 

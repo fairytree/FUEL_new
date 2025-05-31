@@ -59,7 +59,7 @@
   </include>
 
   <!-- trajectory server -->
-  <node pkg="plan_manage" name="traj_server" type="traj_server" output="screen">
+  <node pkg="plan_manage" name="traj_server" type="traj_server" output="log">
     <remap from="/position_cmd" to="planning/pos_cmd"/>
 
     <remap from="/odom_world" to="$(arg odom_topic)"/>
@@ -67,7 +67,7 @@
     <param name="traj_server/pub_traj_id" value="2" type="int"/>
   </node>
 
-  <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator" output="screen">
+  <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator" output="log">
     <remap from="~odom" to="$(arg odom_topic)"/>        
     <remap from="~goal" to="/move_base_simple/goal"/>
     <remap from="~traj_start_trigger" to="/traj_start_trigger" />

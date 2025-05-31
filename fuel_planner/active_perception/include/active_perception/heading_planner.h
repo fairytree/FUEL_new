@@ -36,7 +36,7 @@ public:
   }
 
   virtual void print() {
-    std::cout << "no data in base vertex" << std::endl;
+    //std::cout << "no data in base vertex" << std::endl;
   }
 
   int id_;
@@ -56,7 +56,7 @@ public:
   ~YawVertex() {
   }
   virtual void print() {
-    std::cout << "yaw: " << yaw_ << std::endl;
+    //std::cout << "yaw: " << yaw_ << std::endl;
   }
 
   // vertex type specific members-------

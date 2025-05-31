@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
     }
   }
   for (auto id : tour) {
-    std::cout << id << std::endl;
+    //std::cout << id << std::endl;
   }
 
   return 1;

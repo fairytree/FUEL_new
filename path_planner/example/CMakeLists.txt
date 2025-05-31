@@ -1,0 +1,3 @@
+add_executable(path_planner_example path_planner_example.cpp)
+
+target_link_libraries(path_planner_example path_planner)

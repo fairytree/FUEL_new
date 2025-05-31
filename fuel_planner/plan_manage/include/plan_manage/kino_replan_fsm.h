@@ -39,7 +39,7 @@ public:
   ~Test() {
   }
   void print() {
-    std::cout << "test: " << test_ << std::endl;
+    //std::cout << "test: " << test_ << std::endl;
   }
 };
 

@@ -145,7 +145,7 @@ void cmdCallback(const quadrotor_msgs::PositionCommandConstPtr& msg) {
   }
   // displayLineList(yaw1, yaw2, 0.02, Eigen::Vector4d(0, 0, 0, 1), 0);
 
-  // std::cout << v(0) << "," << v(1) << "," << v(2) << ",";
+  // //std::cout << v(0) << "," << v(1) << "," << v(2) << ",";
   if (v.norm() < 1e-3) {
     ROS_INFO("end, distance: %lf", distance1);
   }
@@ -154,7 +154,7 @@ void cmdCallback(const quadrotor_msgs::PositionCommandConstPtr& msg) {
 bool endtraj = false;
 void trajCallback(const visualization_msgs::MarkerConstPtr& msg) {
   // if (msg->id == 500) return;
-  // std::cout << msg->id << std::endl;
+  // //std::cout << msg->id << std::endl;
   if (msg->id != 399) return;
 
   visualization_msgs::Marker mk;

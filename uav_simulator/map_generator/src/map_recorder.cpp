@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
   ros::NodeHandle node;
 
   if (argc <= 1) {
-    std::cout << "File path not specified" << std::endl;
+    //std::cout << "File path not specified" << std::endl;
     return 0;
   }
 

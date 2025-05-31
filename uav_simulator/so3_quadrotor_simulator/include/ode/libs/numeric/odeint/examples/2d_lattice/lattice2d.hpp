@@ -104,7 +104,7 @@ struct lattice2d {
       std::cerr << "pot file not found: " << filename << std::endl;
       exit(0);
     } else {
-      std::cout << "using pot file: " << filename << std::endl;
+      //std::cout << "using pot file: " << filename << std::endl;
     }
 
     m_omega.resize(dim);

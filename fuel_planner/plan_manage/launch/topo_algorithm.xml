@@ -25,7 +25,7 @@
   <arg name="flight_type"/>
 
   <!-- main node -->
-  <node pkg="plan_manage" name="fast_planner_node" type="fast_planner_node" output="screen">
+  <node pkg="plan_manage" name="fast_planner_node" type="fast_planner_node" output="log">
     <remap from="/odom_world" to="$(arg odometry_topic)"/>
     <remap from ="/map_ros/pose"   to = "$(arg sensor_pose_topic)"/> 
     <remap from ="/map_ros/depth" to = "$(arg depth_topic)"/>

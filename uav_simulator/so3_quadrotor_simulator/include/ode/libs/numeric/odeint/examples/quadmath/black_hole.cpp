@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
   std::for_each(make_adaptive_time_iterator_begin(dopri5, radMod(omega, ell), x, start, end, dt),
                 make_adaptive_time_iterator_end(dopri5, radMod(omega, ell), x),
                 [](const std::pair<state_type&, my_float>& x) {
-                  std::cout << x.second << ", " << x.first[0].real() << "\n";
+                  //std::cout << x.second << ", " << x.first[0].real() << "\n";
                 });
 
   return 0;

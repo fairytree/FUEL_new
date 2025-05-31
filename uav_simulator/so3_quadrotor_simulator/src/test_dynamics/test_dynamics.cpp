@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     quad.setInput(rpm, rpm, rpm, rpm);
     quad.step(dt);
     Eigen::Vector3d euler = state.R.eulerAngles(2, 1, 0);
-    std::cout << i * dt << ", " << state.x(2) << ", " << euler(0) << ", " << euler(1) << ", " << euler(2)
+    //std::cout << i * dt << ", " << state.x(2) << ", " << euler(0) << ", " << euler(1) << ", " << euler(2)
               << ", " << state.omega(0) << ", " << state.omega(1) << ", " << state.omega(2) << ", "
               << state.motor_rpm(0) << std::endl;
 

@@ -83,7 +83,7 @@ struct push_back_time {
 template <class Stepper>
 struct perform_integrate_const_test {
   void operator()(const value_type t_end, const value_type dt) {
-    std::cout << "Testing integrate_const with " << typeid(Stepper).name() << std::endl;
+    //std::cout << "Testing integrate_const with " << typeid(Stepper).name() << std::endl;
 
     state_type x(3, 10.0), x_end(3);
 
@@ -93,13 +93,13 @@ struct perform_integrate_const_test {
 
     // int steps = times.size()-1;
 
-    // std::cout << t_end << " (" << dt << "), " << steps << " , " << times.size() << " , " <<
+    // //std::cout << t_end << " (" << dt << "), " << steps << " , " << times.size() << " , " <<
     // 10.0+dt*steps << "=" << x_end[0] << std::endl;
 
     BOOST_CHECK_EQUAL(static_cast<int>(times.size()), static_cast<int>(floor(t_end / dt)) + 1);
 
     for (size_t i = 0; i < times.size(); ++i) {
-      // std::cout << i << " , " << times[i] << " , " << static_cast< value_type >(i)*dt << std::endl;
+      // //std::cout << i << " , " << times[i] << " , " << static_cast< value_type >(i)*dt << std::endl;
       // check if observer was called at times 0,1,2,...
       BOOST_CHECK_SMALL(times[i] - static_cast<value_type>(i) * dt, (i + 1) * 2E-16);
     }
@@ -114,7 +114,7 @@ struct perform_integrate_const_test {
 template <class Stepper>
 struct perform_integrate_adaptive_test {
   void operator()(const value_type t_end = 10.0, const value_type dt = 0.03) {
-    std::cout << "Testing integrate_adaptive with " << typeid(Stepper).name() << std::endl;
+    //std::cout << "Testing integrate_adaptive with " << typeid(Stepper).name() << std::endl;
 
     state_type x(3, 10.0), x_end(3);
 
@@ -123,7 +123,7 @@ struct perform_integrate_adaptive_test {
     size_t steps =
         integrate_adaptive(Stepper(), *lorenz, x, 0.0, t_end, dt, push_back_time(times, x_end));
 
-    //        std::cout << t_end << " , " << steps << " , " << times.size() << " , " << 10.0+dt*steps <<
+    //        //std::cout << t_end << " , " << steps << " , " << times.size() << " , " << 10.0+dt*steps <<
     //        "=" << x_end[0] << std::endl;
 
     BOOST_CHECK_EQUAL(times.size(), steps + 1);
@@ -141,7 +141,7 @@ struct perform_integrate_adaptive_test {
 template <class Stepper>
 struct perform_integrate_times_test {
   void operator()(const int n = 10, const int dn = 1, const value_type dt = 0.03) {
-    std::cout << "Testing integrate_times with " << typeid(Stepper).name() << std::endl;
+    //std::cout << "Testing integrate_times with " << typeid(Stepper).name() << std::endl;
 
     state_type x(3), x_end(3);
     x[0] = x[1] = x[2] = 10.0;
@@ -175,7 +175,7 @@ struct perform_integrate_times_test {
 template <class Stepper>
 struct perform_integrate_n_steps_test {
   void operator()(const int n = 200, const value_type dt = 0.01) {
-    std::cout << "Testing integrate_n_steps with " << typeid(Stepper).name() << std::endl;
+    //std::cout << "Testing integrate_n_steps with " << typeid(Stepper).name() << std::endl;
 
     state_type x(3), x_end(3);
     x[0] = x[1] = x[2] = 10.0;

@@ -173,7 +173,7 @@ public:
 #pragma warning(default : 4307 34)
 #endif
       }
-      // std::cout << stage_number-2 << ", t': " << t + stage.c * dt << std::endl;
+      // //std::cout << stage_number-2 << ", t': " << t + stage.c * dt << std::endl;
 
       if (stage_number < StageCount)
         detail::template generic_rk_call_algebra<stage_number, Algebra>()(

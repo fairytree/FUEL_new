@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(test_generic_stepper) {
   rk4_generic_type rk4_generic_;
   rk4_generic_type rk4_generic = rk4_generic_;
 
-  // std::cout << stepper;
+  // //std::cout << stepper;
 
   rk4_type rk4_;
   rk4_type rk4 = rk4_;

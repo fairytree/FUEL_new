@@ -71,11 +71,11 @@ BOOST_AUTO_TEST_CASE(rosenbrock4_numeric_test) {
   stepper.do_step(std::make_pair(sys(), jacobi()), x0, 0.0, x1, dt);
   const double f = 2.0 * std::abs(sin(dt) - x1(0)) / std::pow(dt, o);
 
-  std::cout << o << " , " << f << std::endl;
+  //std::cout << o << " , " << f << std::endl;
 
   while (f * std::pow(dt, o) > 1E-16) {
     stepper.do_step(std::make_pair(sys(), jacobi()), x0, 0.0, x1, dt);
-    std::cout << "Testing dt=" << dt << std::endl;
+    //std::cout << "Testing dt=" << dt << std::endl;
     BOOST_CHECK_SMALL(std::abs(sin(dt) - x1(0)), f * std::pow(dt, o));
     dt *= 0.5;
   }

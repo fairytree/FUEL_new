@@ -37,13 +37,13 @@ void mapCallback(const sensor_msgs::PointCloud2& msg) {
   if ((int)latest_cloud.points.size() == 0) return;
 
   have_map = true;
-  std::cout << "[1]: get map" << std::endl;
+  //std::cout << "[1]: get map" << std::endl;
 }
 
 /* ---------- receive start and goal ---------- */
 void sgCallback(const sensor_msgs::PointCloud& msg) {
   if (msg.points.size() != 3) {
-    std::cout << "sg num error." << std::endl;
+    //std::cout << "sg num error." << std::endl;
     return;
   } else {
     cout << "get sg msg." << endl;
@@ -54,7 +54,7 @@ void sgCallback(const sensor_msgs::PointCloud& msg) {
   goal_x = msg.points[2].x, goal_y = msg.points[2].y, goal_z = msg.points[2].z;
 
   have_goal = true;
-  std::cout << "[1]: get sg" << std::endl;
+  //std::cout << "[1]: get sg" << std::endl;
 }
 
 int main(int argc, char** argv) {

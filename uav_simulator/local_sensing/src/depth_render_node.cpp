@@ -131,7 +131,7 @@ void renderDepth() {
 
     if (pc[2] <= 0.0) continue;
 
-    // std::cout << "pc: " << pc.transpose() << std::endl;
+    // //std::cout << "pc: " << pc.transpose() << std::endl;
 
     float projected_x, projected_y;
     projected_x = pc[0] / pc[2] * fx + cx;
@@ -139,10 +139,10 @@ void renderDepth() {
     if (projected_x < 0 || projected_x >= width || projected_y < 0 || projected_y >= height)
       continue;
 
-    // std::cout << "(u,v): " << projected_x << ", " << projected_y << endl;
+    // //std::cout << "(u,v): " << projected_x << ", " << projected_y << endl;
     float dist = pc[2];
     int r = 0.0573 * fx / dist + 0.5;
-    // std::cout << "r: " << r << std::endl;
+    // //std::cout << "r: " << r << std::endl;
     int min_x = max(int(projected_x - r), 0);
     int max_x = min(int(projected_x + r), width - 1);
     int min_y = max(int(projected_y - r), 0);
@@ -150,7 +150,7 @@ void renderDepth() {
 
     for (int to_x = min_x; to_x <= max_x; to_x++)
       for (int to_y = min_y; to_y <= max_y; to_y++) {
-        // std::cout << "(u',v'): " << to_x << ", " << to_y << std::endl;
+        // //std::cout << "(u',v'): " << to_x << ", " << to_y << std::endl;
         float value = depth_mat.at<float>(to_y, to_x);
         if (value < 1e-3) {
           depth_mat.at<float>(to_y, to_x) = dist;

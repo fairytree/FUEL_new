@@ -60,7 +60,7 @@ struct push_back_state_and_time {
 
 struct write_state {
   void operator()(const state_type& x) const {
-    std::cout << x[0] << "\t" << x[1] << "\n";
+    //std::cout << x[0] << "\t" << x[1] << "\n";
   }
 };
 

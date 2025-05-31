@@ -72,23 +72,23 @@ int KinodynamicAstar::search(Eigen::Vector3d start_pt, Eigen::Vector3d start_v, 
     }
     if (reach_horizon) {
       if (is_shot_succ_) {
-        std::cout << "reach end" << std::endl;
+        //std::cout << "reach end" << std::endl;
         return REACH_END;
       } else {
-        std::cout << "reach horizon" << std::endl;
+        //std::cout << "reach horizon" << std::endl;
         return REACH_HORIZON;
       }
     }
 
     if (near_end) {
       if (is_shot_succ_) {
-        std::cout << "reach end" << std::endl;
+        //std::cout << "reach end" << std::endl;
         return REACH_END;
       } else if (cur_node->parent != NULL) {
-        std::cout << "near end" << std::endl;
+        //std::cout << "near end" << std::endl;
         return NEAR_END;
       } else {
-        std::cout << "no path" << std::endl;
+        //std::cout << "no path" << std::endl;
         return NO_PATH;
       }
     }
@@ -132,7 +132,7 @@ int KinodynamicAstar::search(Eigen::Vector3d start_pt, Eigen::Vector3d start_v, 
         // Check inside map range
         Eigen::Vector3d pro_pos = pro_state.head(3);
         if (!edt_environment_->sdf_map_->isInBox(pro_pos)) {
-          if (init_search) std::cout << "box" << std::endl;
+          if (init_search) //std::cout << "box" << std::endl;
           continue;
         }
 
@@ -142,14 +142,14 @@ int KinodynamicAstar::search(Eigen::Vector3d start_pt, Eigen::Vector3d start_v, 
         PathNodePtr pro_node =
             dynamic ? expanded_nodes_.find(pro_id, pro_t_id) : expanded_nodes_.find(pro_id);
         if (pro_node != NULL && pro_node->node_state == IN_CLOSE_SET) {
-          if (init_search) std::cout << "close" << std::endl;
+          if (init_search) //std::cout << "close" << std::endl;
           continue;
         }
 
         // Check maximal velocity
         Eigen::Vector3d pro_v = pro_state.tail(3);
         if (fabs(pro_v(0)) > max_vel_ || fabs(pro_v(1)) > max_vel_ || fabs(pro_v(2)) > max_vel_) {
-          if (init_search) std::cout << "vel" << std::endl;
+          if (init_search) //std::cout << "vel" << std::endl;
           continue;
         }
 
@@ -157,7 +157,7 @@ int KinodynamicAstar::search(Eigen::Vector3d start_pt, Eigen::Vector3d start_v, 
         Eigen::Vector3i diff = pro_id - cur_node->index;
         int diff_time = pro_t_id - cur_node->time_idx;
         if (diff.norm() == 0 && ((!dynamic) || diff_time == 0)) {
-          if (init_search) std::cout << "same" << std::endl;
+          if (init_search) //std::cout << "same" << std::endl;
           continue;
         }
 
@@ -180,7 +180,7 @@ int KinodynamicAstar::search(Eigen::Vector3d start_pt, Eigen::Vector3d start_v, 
           }
         }
         if (is_occ) {
-          if (init_search) std::cout << "safe" << std::endl;
+          if (init_search) //std::cout << "safe" << std::endl;
           continue;
         }
 

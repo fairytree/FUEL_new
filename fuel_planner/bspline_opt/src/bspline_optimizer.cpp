@@ -84,6 +84,9 @@ void BsplineOptimizer::setGuidePath(const vector<Eigen::Vector3d>& guide_pt) {
 
 void BsplineOptimizer::setWaypoints(const vector<Eigen::Vector3d>& waypts,
                                     const vector<int>& waypt_idx) {
+  ROS_DEBUG("*********ROS_DEBUG bspline_optimizer**********");
+  ROS_INFO("**********ROS_INFO bspline_optimizer***********");
+
   waypoints_ = waypts;
   waypt_idx_ = waypt_idx;
 }
@@ -233,8 +236,8 @@ void BsplineOptimizer::optimize() {
   if (optimize_time_) knot_span_ = best_variable_[variable_num_ - 1];
 
   if (cost_function_ & MINTIME) {
-    std::cout << "Iter num: " << iter_num_ << ", time: " << (ros::Time::now() - t1).toSec()
-              << ", point num: " << point_num_ << ", comb time: " << comb_time << std::endl;
+    //std::cout << "Iter num: " << iter_num_ << ", time: " << (ros::Time::now() - t1).toSec()
+              // << ", point num: " << point_num_ << ", comb time: " << comb_time << std::endl;
   }
 
   // Deprecated
@@ -701,7 +704,7 @@ double BsplineOptimizer::costFunction(const std::vector<double>& x, std::vector<
   if (cost < opt->min_cost_) {
     opt->min_cost_ = cost;
     opt->best_variable_ = x;
-    // std::cout << cost << ", ";
+    // //std::cout << cost << ", ";
   }
   return cost;
 

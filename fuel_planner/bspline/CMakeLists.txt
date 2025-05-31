@@ -23,7 +23,8 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   Bspline.msg
-  )
+  NextPosAndYaw.msg
+)
   
 # Generate added messages and services with any dependencies listed here
 generate_messages(
@@ -31,7 +32,6 @@ generate_messages(
   std_msgs
   geometry_msgs
 )
-
 
 catkin_package(
  INCLUDE_DIRS include

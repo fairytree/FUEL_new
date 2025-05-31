@@ -229,7 +229,7 @@ void cmdTrajCallback(const visualization_msgs::MarkerConstPtr& msg) {
   //     if (iter->x < -2.5 && iter->x > -4 && iter->y < -4 && iter->y > -6)
   //     {
   //       iter = mk.points.erase(iter);
-  //       std::cout << "erase" << std::endl;
+  //       //std::cout << "erase" << std::endl;
   //     }
   //     else
   //       ++iter;

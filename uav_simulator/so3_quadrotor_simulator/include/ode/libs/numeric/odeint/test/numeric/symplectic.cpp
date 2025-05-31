@@ -63,12 +63,12 @@ struct perform_symplectic_test {
     stepper.do_step(osc(), std::make_pair(q0, p0), t, x1, dt);
     const double f = 2.0 * std::abs(sin(dt) - x1.first[0]) / std::pow(dt, o);
 
-    std::cout << o << " , " << f << std::endl;
+    //std::cout << o << " , " << f << std::endl;
 
     /* as long as we have errors above machine precision */
     while (f * std::pow(dt, o) > 1E-16) {
       stepper.do_step(osc(), std::make_pair(q0, p0), t, x1, dt);
-      std::cout << "Testing dt=" << dt << std::endl;
+      //std::cout << "Testing dt=" << dt << std::endl;
       BOOST_CHECK_SMALL(std::abs(sin(dt) - x1.first[0]), f * std::pow(dt, o));
       dt *= 0.5;
     }

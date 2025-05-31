@@ -206,7 +206,7 @@ bool VisibilityUtil::findCriticalPoint(NonUniformBspline& traj, const Eigen::Vec
     }
   }
   if (tb < -5) {
-    std::cout << "all pt visible" << std::endl;
+    //std::cout << "all pt visible" << std::endl;
     return false;
   }
 
@@ -237,9 +237,9 @@ bool VisibilityUtil::findDirAndIdx(NonUniformBspline& traj, const double& unknow
     // ++num_v;
   }
   double dist1 = r0_ + forward_ + pow(max_v, 2) / (2 * max_acc_);
-  std::cout << "max v: " << max_v << ", d: " << dist1 << std::endl;
+  //std::cout << "max v: " << max_v << ", d: " << dist1 << std::endl;
   // mean_v = mean_v / num_v;
-  // std::cout << "mean v: " << mean_v << ", d1: " << dist1 << std::endl;
+  // //std::cout << "mean v: " << mean_v << ", d1: " << dist1 << std::endl;
   // double cur_v = vel.evaluateDeBoorT(0.0).norm();
   // double dist0 = r0_ + pow(max_v, 2) / (2 * max_acc_);
 
@@ -256,7 +256,7 @@ bool VisibilityUtil::findDirAndIdx(NonUniformBspline& traj, const double& unknow
   }
   dist1 = min(max_safe_dist_, dist1);
   dir = v * dist1;
-  std::cout << "dir: " << dir.transpose() << ", len: " << dir.norm() << std::endl;
+  //std::cout << "dir: " << dir.transpose() << ", len: " << dir.norm() << std::endl;
 
   // find min cost idx
   double dt = traj.getKnotSpan();
@@ -280,10 +280,10 @@ bool VisibilityUtil::findDirAndIdx(NonUniformBspline& traj, const double& unknow
     }
   }
   if (idx > idb) {
-    std::cout << "min pt in front of critic" << std::endl;
+    //std::cout << "min pt in front of critic" << std::endl;
     return false;
   }
-  std::cout << "idx: " << idx << std::endl;
+  //std::cout << "idx: " << idx << std::endl;
 }
 
 void VisibilityUtil::calcViewConstraint(NonUniformBspline& traj, ViewConstraint& cons) {
@@ -369,7 +369,7 @@ vector<Eigen::Vector3d> VisibilityUtil::precomputeForVisibility(const vector<Eig
     //     } else {
     //       block_pts[i](2) = -10086;
     //       if (debug) {
-    //         std::cout << "out: " << j << "/" << ctrl_pts.size() - 1
+    //         //std::cout << "out: " << j << "/" << ctrl_pts.size() - 1
     //                   << std::endl;
     //       }
     //     }
@@ -377,7 +377,7 @@ vector<Eigen::Vector3d> VisibilityUtil::precomputeForVisibility(const vector<Eig
     // } else {
     //   block_pts[i](2) = -10086;
     //   if (debug) {
-    //     std::cout << "grad: " << j << "/" << ctrl_pts.size() - 1 <<
+    //     //std::cout << "grad: " << j << "/" << ctrl_pts.size() - 1 <<
     //     std::endl;
     //   }
     // }

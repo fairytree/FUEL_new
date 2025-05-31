@@ -153,7 +153,7 @@ double NonUniformBspline::checkRatio() {
       max_acc = max(max_acc, fabs(acc(j)));
   }
   double ratio = max(max_vel / limit_vel_, sqrt(fabs(max_acc) / limit_acc_));
-  ROS_INFO("max vel: %lf, max acc: %lf, ratio: %lf", max_vel, max_acc, ratio);
+  // ROS_INFO("max vel: %lf, max acc: %lf, ratio: %lf", max_vel, max_acc, ratio);
   ROS_ERROR_COND(ratio > 2.0, "max vel: %lf, max acc: %lf, ratio: %lf", max_vel, max_acc, ratio);
 
   return ratio;
@@ -242,8 +242,8 @@ void NonUniformBspline::parameterizeToBspline(const double& ts, const vector<Eig
   }
 
   // cout << fixed << setprecision(2) << endl;
-  // std::cout << "A:" << std::endl;
-  // std::cout << A << std::endl;
+  // //std::cout << "A:" << std::endl;
+  // //std::cout << A << std::endl;
 
   // K Waypoints and 4 boundary derivative
   for (int i = 0; i < K; ++i) {

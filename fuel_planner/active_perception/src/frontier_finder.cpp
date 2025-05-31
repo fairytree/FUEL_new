@@ -69,7 +69,7 @@ void FrontierFinder::searchFrontiers() {
     iter = frontiers.erase(iter);
   };
 
-  std::cout << "Before remove: " << frontiers_.size() << std::endl;
+  //std::cout << "Before remove: " << frontiers_.size() << std::endl;
 
   removed_ids_.clear();
   int rmv_idx = 0;
@@ -83,7 +83,7 @@ void FrontierFinder::searchFrontiers() {
       ++iter;
     }
   }
-  std::cout << "After remove: " << frontiers_.size() << std::endl;
+  //std::cout << "After remove: " << frontiers_.size() << std::endl;
   for (auto iter = dormant_frontiers_.begin(); iter != dormant_frontiers_.end();) {
     if (haveOverlap(iter->box_min_, iter->box_max_, update_min, update_max) &&
         isFrontierChanged(*iter))
@@ -122,7 +122,7 @@ void FrontierFinder::searchFrontiers() {
 
 void FrontierFinder::expandFrontier(
     const Eigen::Vector3i& first /* , const int& depth, const int& parent_id */) {
-  // std::cout << "depth: " << depth << std::endl;
+  // //std::cout << "depth: " << depth << std::endl;
   auto t1 = ros::Time::now();
 
   // Data for clustering
@@ -211,8 +211,8 @@ bool FrontierFinder::splitHorizontally(const Frontier& frontier, list<Frontier>&
     }
   }
   Eigen::Vector2d first_pc = vectors.col(max_idx);
-  std::cout << "max idx: " << max_idx << std::endl;
-  std::cout << "mean: " << mean.transpose() << ", first pc: " << first_pc.transpose() << std::endl;
+  //std::cout << "max idx: " << max_idx << std::endl;
+  //std::cout << "mean: " << mean.transpose() << ", first pc: " << first_pc.transpose() << std::endl;
 
   // Split the frontier into two groups along the first PC
   Frontier ftr1, ftr2;
@@ -258,12 +258,12 @@ bool FrontierFinder::isInBoxes(
 }
 
 void FrontierFinder::updateFrontierCostMatrix() {
-  std::cout << "cost mat size before remove: " << std::endl;
+  //std::cout << "cost mat size before remove: " << std::endl;
   for (auto ftr : frontiers_)
-    std::cout << "(" << ftr.costs_.size() << "," << ftr.paths_.size() << "), ";
-  std::cout << "" << std::endl;
+    //std::cout << "(" << ftr.costs_.size() << "," << ftr.paths_.size() << "), ";
+  //std::cout << "" << std::endl;
 
-  std::cout << "cost mat size remove: " << std::endl;
+  //std::cout << "cost mat size remove: " << std::endl;
   if (!removed_ids_.empty()) {
     // Delete path and cost for removed clusters
     for (auto it = frontiers_.begin(); it != first_new_ftr_; ++it) {
@@ -280,14 +280,14 @@ void FrontierFinder::updateFrontierCostMatrix() {
         cost_iter = it->costs_.erase(cost_iter);
         path_iter = it->paths_.erase(path_iter);
       }
-      std::cout << "(" << it->costs_.size() << "," << it->paths_.size() << "), ";
+      //std::cout << "(" << it->costs_.size() << "," << it->paths_.size() << "), ";
     }
     removed_ids_.clear();
   }
-  std::cout << "" << std::endl;
+  //std::cout << "" << std::endl;
 
   auto updateCost = [](const list<Frontier>::iterator& it1, const list<Frontier>::iterator& it2) {
-    std::cout << "(" << it1->id_ << "," << it2->id_ << "), ";
+    //std::cout << "(" << it1->id_ << "," << it2->id_ << "), ";
     // Search path from old cluster's top viewpoint to new cluster'
     Viewpoint& vui = it1->viewpoints_.front();
     Viewpoint& vuj = it2->viewpoints_.front();
@@ -302,7 +302,7 @@ void FrontierFinder::updateFrontierCostMatrix() {
     it2->paths_.push_back(path_ij);
   };
 
-  std::cout << "cost mat add: " << std::endl;
+  //std::cout << "cost mat add: " << std::endl;
   // Compute path and cost between old and new clusters
   for (auto it1 = frontiers_.begin(); it1 != first_new_ftr_; ++it1)
     for (auto it2 = first_new_ftr_; it2 != frontiers_.end(); ++it2)
@@ -312,17 +312,19 @@ void FrontierFinder::updateFrontierCostMatrix() {
   for (auto it1 = first_new_ftr_; it1 != frontiers_.end(); ++it1)
     for (auto it2 = it1; it2 != frontiers_.end(); ++it2) {
       if (it1 == it2) {
-        std::cout << "(" << it1->id_ << "," << it2->id_ << "), ";
+        //std::cout << "(" << it1->id_ << "," << it2->id_ << "), ";
         it1->costs_.push_back(0);
         it1->paths_.push_back({});
       } else
         updateCost(it1, it2);
     }
-  std::cout << "" << std::endl;
-  std::cout << "cost mat size final: " << std::endl;
+  //std::cout << "" << std::endl;
+  //std::cout << "cost mat size final: " << std::endl;
   for (auto ftr : frontiers_)
-    std::cout << "(" << ftr.costs_.size() << "," << ftr.paths_.size() << "), ";
-  std::cout << "" << std::endl;
+    {
+      //std::cout << "(" << ftr.costs_.size() << "," << ftr.paths_.size() << "), ";
+  //std::cout << "" << std::endl;
+    }
 }
 
 void FrontierFinder::mergeFrontiers(Frontier& ftr1, const Frontier& ftr2) {
@@ -415,11 +417,11 @@ void FrontierFinder::computeFrontiersToVisit() {
   int idx = 0;
   for (auto& ft : frontiers_) {
     ft.id_ = idx++;
-    std::cout << ft.id_ << ", ";
+    //std::cout << ft.id_ << ", ";
   }
-  std::cout << "\nnew num: " << new_num << ", new dormant: " << new_dormant_num << std::endl;
-  std::cout << "to visit: " << frontiers_.size() << ", dormant: " << dormant_frontiers_.size()
-            << std::endl;
+  //std::cout << "\nnew num: " << new_num << ", new dormant: " << new_dormant_num << std::endl;
+  //std::cout << "to visit: " << frontiers_.size() << ", dormant: " << dormant_frontiers_.size()
+            // << std::endl;
 }
 
 void FrontierFinder::getTopViewpointsInfo(
@@ -563,31 +565,31 @@ void FrontierFinder::getFullCostMatrix(
     // Use Asymmetric TSP
     int dimen = frontiers_.size();
     mat.resize(dimen + 1, dimen + 1);
-    // std::cout << "mat size: " << mat.rows() << ", " << mat.cols() << std::endl;
+    // //std::cout << "mat size: " << mat.rows() << ", " << mat.cols() << std::endl;
     // Fill block for clusters
     int i = 1, j = 1;
     for (auto ftr : frontiers_) {
       for (auto cs : ftr.costs_) {
-        // std::cout << "(" << i << ", " << j << ")"
+        // //std::cout << "(" << i << ", " << j << ")"
         // << ", ";
         mat(i, j++) = cs;
       }
       ++i;
       j = 1;
     }
-    // std::cout << "" << std::endl;
+    // //std::cout << "" << std::endl;
 
     // Fill block from current state to clusters
     mat.leftCols<1>().setZero();
     for (auto ftr : frontiers_) {
-      // std::cout << "(0, " << j << ")"
+      // //std::cout << "(0, " << j << ")"
       // << ", ";
       Viewpoint vj = ftr.viewpoints_.front();
       vector<Vector3d> path;
       mat(0, j++) =
           ViewNode::computeCost(cur_pos, vj.pos_, cur_yaw[0], vj.yaw_, cur_vel, cur_yaw[1], path);
     }
-    // std::cout << "" << std::endl;
+    // //std::cout << "" << std::endl;
   }
 }
 

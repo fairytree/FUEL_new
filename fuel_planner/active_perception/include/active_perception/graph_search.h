@@ -75,7 +75,7 @@ void GraphSearch<NodeT>::addEdge(const int& from, const int& to) {
 template <typename NodeT>
 void GraphSearch<NodeT>::DijkstraSearch(const int& start, const int& goal,
                                         vector<shared_ptr<NodeT>>& path) {
-  std::cout << "Node: " << node_num_ << ", edge: " << edge_num_ << std::endl;
+  //std::cout << "Node: " << node_num_ << ", edge: " << edge_num_ << std::endl;
   // Basic structure used by Dijkstra
   // unordered_map<int, int> close_set;
   priority_queue<shared_ptr<NodeT>, vector<shared_ptr<NodeT>>, NodeCompare<NodeT>> open_set;
@@ -93,7 +93,7 @@ void GraphSearch<NodeT>::DijkstraSearch(const int& start, const int& goal,
 
     // Check if reach target
     if (vc == end_v) {
-      // std::cout << "Dijkstra reach target" << std::endl;
+      // //std::cout << "Dijkstra reach target" << std::endl;
       shared_ptr<NodeT> vit = vc;
       while (vit != nullptr) {
         path.push_back(vit);

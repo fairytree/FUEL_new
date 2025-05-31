@@ -42,7 +42,7 @@
     <param name="sensing/rate"   value="10.0"/>        
   </node>
 
-  <node pkg="local_sensing_node" type="pcl_render_node" name="pcl_render_node" output="screen">
+  <node pkg="local_sensing_node" type="pcl_render_node" name="pcl_render_node" output="log">
     <rosparam command="load" file="$(find local_sensing_node)/params/camera.yaml" />
     <param name="sensing_horizon"  value="5.0" />
     <param name="sensing_rate"     value="30.0"/>
@@ -58,7 +58,7 @@
     <remap from="~camera_info" to="/SQ01s/camera/depth/camera_info"/>
   </node>
 
-  <!-- <node pkg="so3_quadrotor_simulator" type="quadrotor_simulator_so3" name="quadrotor_simulator_so3" output="screen">
+  <!-- <node pkg="so3_quadrotor_simulator" type="quadrotor_simulator_so3" name="quadrotor_simulator_so3" output="log">
         <param name="rate/odom" value="200.0"/>
         <param name="simulator/init_state_x" value="$(arg init_x)"/>
         <param name="simulator/init_state_y" value="$(arg init_y)"/>
@@ -70,7 +70,7 @@
         <remap from="~moment_disturbance" to="moment_disturbance"/>        
   </node>
  
-  <node pkg="nodelet" type="nodelet" args="standalone so3_control/SO3ControlNodelet" name="so3_control" required="true" output="screen">
+  <node pkg="nodelet" type="nodelet" args="standalone so3_control/SO3ControlNodelet" name="so3_control" required="true" output="log">
         <remap from="~odom" to="/state_ukf/odom"/>
         <remap from="~position_cmd" to="/planning/pos_cmd"/>
         <remap from="~motors" to="motors"/>
@@ -85,7 +85,7 @@
         <param name="gains/ang/z" value="0.1"/>        
   </node>  
  
-  <node pkg="so3_disturbance_generator" name="so3_disturbance_generator" type="so3_disturbance_generator" output="screen">
+  <node pkg="so3_disturbance_generator" name="so3_disturbance_generator" type="so3_disturbance_generator" output="log">
         <remap from="~odom" to="/visual_slam/odom"/>             
         <remap from="~noisy_odom" to="/state_ukf/odom"/>          
         <remap from="~correction" to="/visual_slam/correction"/>   
@@ -93,7 +93,7 @@
         <remap from="~moment_disturbance" to="moment_disturbance"/>            
   </node> 
  
-  <node pkg="odom_visualization" name="odom_visualization" type="odom_visualization" output="screen">
+  <node pkg="odom_visualization" name="odom_visualization" type="odom_visualization" output="log">
         <remap from="~odom" to="/visual_slam/odom"/>
         <param name="color/a" value="1.0"/>    
         <param name="color/r" value="0.0"/>        

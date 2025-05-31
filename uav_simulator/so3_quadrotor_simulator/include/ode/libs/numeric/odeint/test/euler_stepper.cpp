@@ -64,10 +64,10 @@ typedef my_vec state_type;
 /* use functors, because functions don't work with msvc 10, I guess this is a bug */
 struct sys {
   void operator()(const state_type& x, state_type& dxdt, const value_type t) const {
-    std::cout << "sys start " << dxdt.size() << std::endl;
+    //std::cout << "sys start " << dxdt.size() << std::endl;
     dxdt[0] = x[0] + 2 * x[1];
     dxdt[1] = x[1];
-    std::cout << "sys done" << std::endl;
+    //std::cout << "sys done" << std::endl;
   }
 };
 
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(test_euler) {
   x[0] = 0.0;
   x[1] = 1.0;
 
-  std::cout << "initialized" << std::endl;
+  //std::cout << "initialized" << std::endl;
 
   const value_type eps = 1E-12;
   const value_type dt = 0.1;

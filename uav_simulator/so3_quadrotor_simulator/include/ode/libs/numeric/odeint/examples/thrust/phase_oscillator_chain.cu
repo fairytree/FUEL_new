@@ -151,6 +151,6 @@ int main( int arc , char* argv[] )
     integrate_const( stepper , sys , x , 0.0 , 10.0 , dt );
 
     thrust::copy( x.begin() , x.end() , std::ostream_iterator< value_type >( std::cout , "\n" ) );
-    std::cout << std::endl;
+    //std::cout << std::endl;
     //]
 }

@@ -92,7 +92,7 @@ void KinoReplanFSM::printFSMExecState() {
   string state_str[5] = { "INIT", "WAIT_TARGET", "GEN_NEW_TRAJ", "REPLAN_TRAJ", "EXEC_"
                                                                                 "TRAJ" };
 
-  cout << "[FSM]: state: " + state_str[int(exec_state_)] << endl;
+  // cout << "[FSM]: state: " + state_str[int(exec_state_)] << endl;
 }
 
 void KinoReplanFSM::execFSMCallback(const ros::TimerEvent& e) {

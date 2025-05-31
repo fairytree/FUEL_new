@@ -616,7 +616,7 @@ void PlanningVisualization::drawYawPath(NonUniformBspline& pos, const vector<dou
 Eigen::Vector4d PlanningVisualization::getColor(const double& h, double alpha) {
   double h1 = h;
   if (h1 < 0.0 || h1 > 1.0) {
-    std::cout << "h out of range" << std::endl;
+    //std::cout << "h out of range" << std::endl;
     h1 = 0.0;
   }
 

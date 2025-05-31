@@ -35,7 +35,7 @@ public:
   }
 
   virtual void print() {
-    std::cout << "Base node" << std::endl;
+    //std::cout << "Base node" << std::endl;
   }
 
   int id_;
@@ -56,7 +56,7 @@ public:
   }
 
   virtual void print() {
-    std::cout << "View node" << yaw_ << std::endl;
+    //std::cout << "View node" << yaw_ << std::endl;
   }
 
   void printNeighbors() {

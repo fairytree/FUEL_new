@@ -42,6 +42,6 @@ BOOST_AUTO_TEST_CASE(test_mkl) {
 
   using std::abs;
 
-  std::cout << x[0] << " ?= " << 0.1 << std::endl;
+  //std::cout << x[0] << " ?= " << 0.1 << std::endl;
   BOOST_CHECK_SMALL(abs(x[0] - 0.1), eps);
 }

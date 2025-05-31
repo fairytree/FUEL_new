@@ -73,5 +73,5 @@ BOOST_AUTO_TEST_CASE(gsl) {
 
   std::vector<double> res(3 * n);
   vex::copy(X(0), res);
-  std::cout << res[0] << std::endl;
+  //std::cout << res[0] << std::endl;
 }

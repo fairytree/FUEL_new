@@ -1,0 +1,3 @@
+add_executable(governor_example governor_example.cpp)
+
+target_link_libraries(governor_example governor)

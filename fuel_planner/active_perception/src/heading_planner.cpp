@@ -68,7 +68,7 @@ void Graph::dijkstraSearch(const int& start, const int& goal, vector<YawVertex::
 
     // reach target
     if (vc == end_v) {
-      // std::cout << "Dijkstra reach target" << std::endl;
+      // //std::cout << "Dijkstra reach target" << std::endl;
       YawVertex::Ptr vit = vc;
       while (vit != nullptr) {
         path.push_back(vit);
@@ -111,9 +111,9 @@ HeadingPlanner::HeadingPlanner(ros::NodeHandle& nh) {
   nh.param("heading_planner/max_yaw_rate", max_yaw_rate_, -1.0);
   nh.param("heading_planner/w", w_, -1.0);
   nh.param("heading_planner/weight_type", weight_type_, -1);
-  std::cout << "yaw diff: " << yaw_diff_ << std::endl;
-  std::cout << "max yaw diff: " << max_yaw_rate_ << std::endl;
-  std::cout << "vert num: " << half_vert_num_ << std::endl;
+  //std::cout << "yaw diff: " << yaw_diff_ << std::endl;
+  //std::cout << "max yaw diff: " << max_yaw_rate_ << std::endl;
+  //std::cout << "vert num: " << half_vert_num_ << std::endl;
 
   // camera FoV params
   far_ = 4.5;
@@ -127,10 +127,10 @@ HeadingPlanner::HeadingPlanner(ros::NodeHandle& nh) {
   n_left_ << sin(M_PI_2 - left_ang), 0.0, cos(M_PI_2 - left_ang);
   n_right_ << -sin(M_PI_2 - right_ang), 0.0, cos(M_PI_2 - right_ang);
 
-  std::cout << "top: " << n_top_ << std::endl;
-  std::cout << "bottom: " << n_bottom_ << std::endl;
-  std::cout << "left: " << n_left_ << std::endl;
-  std::cout << "right: " << n_right_ << std::endl;
+  //std::cout << "top: " << n_top_ << std::endl;
+  //std::cout << "bottom: " << n_bottom_ << std::endl;
+  //std::cout << "left: " << n_left_ << std::endl;
+  //std::cout << "right: " << n_right_ << std::endl;
 
   // vertices of FoV assuming zero pitch
   lefttop_ << -far_ * tan(left_ang), -far_ * sin(top_ang), far_;
@@ -138,10 +138,10 @@ HeadingPlanner::HeadingPlanner(ros::NodeHandle& nh) {
   righttop_ << far_ * sin(right_ang), -far_ * sin(top_ang), far_;
   rightbottom_ << far_ * sin(right_ang), far_ * sin(top_ang), far_;
 
-  std::cout << "lefttop: " << lefttop_.transpose() << std::endl;
-  std::cout << "leftbottom: " << leftbottom_.transpose() << std::endl;
-  std::cout << "righttop: " << righttop_.transpose() << std::endl;
-  std::cout << "rightbottom: " << rightbottom_.transpose() << std::endl;
+  //std::cout << "lefttop: " << lefttop_.transpose() << std::endl;
+  //std::cout << "leftbottom: " << leftbottom_.transpose() << std::endl;
+  //std::cout << "righttop: " << righttop_.transpose() << std::endl;
+  //std::cout << "rightbottom: " << rightbottom_.transpose() << std::endl;
 
   cast_flags_ = CastFlags(1000000);
   // T_cb_ << 0, -1,  0, 0,
@@ -151,8 +151,8 @@ HeadingPlanner::HeadingPlanner(ros::NodeHandle& nh) {
   T_cb_ << 0, -1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1;
   T_bc_ = T_cb_.inverse();
 
-  std::cout << "T_cb: " << T_cb_ << std::endl;
-  std::cout << "T_bc: " << T_bc_ << std::endl;
+  //std::cout << "T_cb: " << T_cb_ << std::endl;
+  //std::cout << "T_bc: " << T_bc_ << std::endl;
 
   casters_.resize(2 * half_vert_num_ + 1);
   for (int i = 0; i < 2 * half_vert_num_ + 1; ++i) {
@@ -202,20 +202,20 @@ void HeadingPlanner::searchPathOfYaw(const vector<Eigen::Vector3d>& pts, const v
       }
     }
     // // debug
-    // std::cout << "pos: " << pts[i].transpose() << std::endl;
-    // std::cout << "center yaw: " << int(yaws[i] * 57.3) << std::endl;
+    // //std::cout << "pos: " << pts[i].transpose() << std::endl;
+    // //std::cout << "center yaw: " << int(yaws[i] * 57.3) << std::endl;
     // for (auto vl : layer) {
-    //   std::cout << vl->id_ << ":" << int(vl->yaw_ * 57.3) << "; ";
+    //   //std::cout << vl->id_ << ":" << int(vl->yaw_ * 57.3) << "; ";
     // }
-    // std::cout << "" << std::endl;
+    // //std::cout << "" << std::endl;
     // connect vertice from last layer to this layer
-    // std::cout << "-------------" << (ros::Time::now() - t1).toSec() << " secs" <<
+    // //std::cout << "-------------" << (ros::Time::now() - t1).toSec() << " secs" <<
     // std::endl;
 
     for (auto v1 : last_layer) {
       for (auto v2 : layer) {
         yaw_graph.addEdge(v1->id_, v2->id_);
-        // std::cout << v1->id_ << "->" << v2->id_ << "; ";
+        // //std::cout << v1->id_ << "->" << v2->id_ << "; ";
       }
     }
     last_layer.clear();
@@ -225,12 +225,12 @@ void HeadingPlanner::searchPathOfYaw(const vector<Eigen::Vector3d>& pts, const v
   vector<YawVertex::Ptr> vert_path;
   yaw_graph.dijkstraSearch(0, gid - 1, vert_path);
 
-  std::cout << "Gains of " << vert_path.size() << " vertice: ";
+  //std::cout << "Gains of " << vert_path.size() << " vertice: ";
   for (auto vert : vert_path) {
     path.push_back(vert->yaw_);
-    std::cout << vert->info_gain_ << ", ";
+    //std::cout << vert->info_gain_ << ", ";
   }
-  std::cout << "" << std::endl;
+  //std::cout << "" << std::endl;
 }
 
 double HeadingPlanner::calcInformationGain(const Eigen::Vector3d& pt, const double& yaw,
@@ -317,7 +317,7 @@ double HeadingPlanner::calcInformationGain(const Eigen::Vector3d& pt, const doub
 
   // ROS_WARN("gain %d is %lf, cost %lf secs", task_id, gain, (ros::Time::now() -
   // t1).toSec());
-  // std::cout << "gain: " << gain << std::endl;
+  // //std::cout << "gain: " << gain << std::endl;
   return gain;
 }
 
@@ -468,8 +468,10 @@ void HeadingPlanner::distToPathAndCurPos(const Eigen::Vector3d& check_pt,
     dists.second += (ctrl_pts.row(i + 1) - ctrl_pts.row(i)).norm();
   }
   if (debug)
-    std::cout << "pos: " << check_pt.transpose() << ", d1: " << dists.first << ", d2: " << dists.second
-              << std::endl;
+  {
+    //std::cout << "pos: " << check_pt.transpose() << ", d1: " << dists.first << ", d2: " << dists.second
+              // << std::endl;
+              }
 }
 
 bool HeadingPlanner::insideFoV(const Eigen::Vector3d& pw, const Eigen::Vector3d& pc,
@@ -496,14 +498,14 @@ void HeadingPlanner::setFrontier(const vector<vector<Eigen::Vector3d>>& frontier
   }
 
   // downsample use voxel grid filter
-  std::cout << "num1: " << raw_input->points.size() << std::endl;
+  //std::cout << "num1: " << raw_input->points.size() << std::endl;
 
   pcl::VoxelGrid<pcl::PointXYZ> sor;
   sor.setInputCloud(raw_input);
   sor.setLeafSize(0.2f, 0.2f, 0.2f);
   sor.filter(*frontier_);
 
-  std::cout << "num2: " << frontier_->points.size() << std::endl;
+  //std::cout << "num2: " << frontier_->points.size() << std::endl;
 
   frontier_->width = frontier_->points.size();
   frontier_->height = 1;
@@ -526,7 +528,7 @@ void HeadingPlanner::calcVisibFrontier(const Eigen::Vector3d& pt, const double& 
   if (num == 0) {
     return;
   }
-  // std::cout << "radius search num: " << num << std::endl;
+  // //std::cout << "radius search num: " << num << std::endl;
 
   // compute camera transform
   Eigen::Matrix3d R_wc;
@@ -557,13 +559,13 @@ void HeadingPlanner::calcVisibFrontier(const Eigen::Vector3d& pt, const double& 
   // pcl::toROSMsg(visib_pts, msg);
   // visib_pub_.publish(msg);
 
-  // std::cout << "visib fronter time: " << (ros::Time::now() - t1).toSec() <<
-  // std::endl; std::cout << "visib size: " << visib_pts.points.size() << std::endl;
+  // //std::cout << "visib fronter time: " << (ros::Time::now() - t1).toSec() <<
+  // std::endl; //std::cout << "visib size: " << visib_pts.points.size() << std::endl;
 }
 
 void HeadingPlanner::showVisibFrontier(const vector<YawVertex::Ptr>& path) {
   // for (auto v : path) {
-  //   std::cout << v->yaw_ << std::endl;
+  //   //std::cout << v->yaw_ << std::endl;
   // }
 
   // auto visib = path.back()->path_visib_;

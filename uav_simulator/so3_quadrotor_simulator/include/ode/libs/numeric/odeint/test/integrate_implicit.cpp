@@ -94,7 +94,7 @@ struct perform_integrate_const_test {
     BOOST_CHECK_EQUAL(static_cast<int>(times.size()), static_cast<int>(floor(t_end / dt)) + 1);
 
     for (size_t i = 0; i < times.size(); ++i) {
-      // std::cout << i << std::endl;
+      // //std::cout << i << std::endl;
       // check if observer was called at times 0,1,2,...
       BOOST_CHECK_SMALL(times[i] - static_cast<value_type>(i) * dt, (i + 1) * 2.0e-16);
     }

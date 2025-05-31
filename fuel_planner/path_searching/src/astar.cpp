@@ -12,6 +12,7 @@ Astar::~Astar() {
 }
 
 int Astar::search(Eigen::Vector3d start_pt, Eigen::Vector3d end_pt, bool dynamic, double time_start) {
+  std::cout << "*****************I am Astar**********************" << std::endl;
   /* ---------- initialize ---------- */
 
   NodePtr cur_node = path_node_pool_[0];

@@ -49,11 +49,11 @@ void Quadrotor::step(double dt) {
 
   for (int i = 0; i < 22; ++i) {
     if (std::isnan(internal_state_[i])) {
-      std::cout << "dump " << i << " << pos ";
+      //std::cout << "dump " << i << " << pos ";
       for (int j = 0; j < 22; ++j) {
-        std::cout << save[j] << " ";
+        //std::cout << save[j] << " ";
       }
-      std::cout << std::endl;
+      //std::cout << std::endl;
       internal_state_ = save;
       break;
     }
@@ -101,8 +101,8 @@ void Quadrotor::operator()(const Quadrotor::InternalState& x, Quadrotor::Interna
     cur_state.motor_rpm(i) = x[18 + i];
   }
 
-  // std::cout << "Omega: " << cur_state.omega << std::endl;
-  // std::cout << "motor_rpm: " << cur_state.motor_rpm << std::endl;
+  // //std::cout << "Omega: " << cur_state.omega << std::endl;
+  // //std::cout << "motor_rpm: " << cur_state.motor_rpm << std::endl;
 
   // Re-orthonormalize R (polar decomposition)
   Eigen::LLT<Eigen::Matrix3d> llt(cur_state.R.transpose() * cur_state.R);
@@ -181,7 +181,7 @@ void Quadrotor::operator()(const Quadrotor::InternalState& x, Quadrotor::Interna
   for (int i = 0; i < 22; ++i) {
     if (std::isnan(dxdt[i])) {
       dxdt[i] = 0;
-      //      std::cout << "nan apply to 0 for " << i << std::endl;
+      //      //std::cout << "nan apply to 0 for " << i << std::endl;
     }
   }
 }
@@ -194,7 +194,7 @@ void Quadrotor::setInput(double u1, double u2, double u3, double u4) {
   for (int i = 0; i < 4; i++) {
     if (std::isnan(input_(i))) {
       input_(i) = (max_rpm_ + min_rpm_) / 2;
-      std::cout << "NAN input ";
+      //std::cout << "NAN input ";
     }
     if (input_(i) > max_rpm_)
       input_(i) = max_rpm_;

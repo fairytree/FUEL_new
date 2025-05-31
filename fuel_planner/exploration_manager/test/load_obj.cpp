@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     ros::Duration(0.2).sleep();
   }
 
-  std::cout << "Cloud published!" << std::endl;
+  //std::cout << "Cloud published!" << std::endl;
 
   return 1;
 }

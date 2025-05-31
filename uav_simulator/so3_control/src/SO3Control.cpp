@@ -23,6 +23,7 @@ void SO3Control::setVelocity(const Eigen::Vector3d& velocity) {
   vel_ = velocity;
 }
 
+//!!!
 void SO3Control::calculateControl(const Eigen::Vector3d& des_pos, const Eigen::Vector3d& des_vel,
                                   const Eigen::Vector3d& des_acc, const double des_yaw,
                                   const double des_yaw_dot, const Eigen::Vector3d& kx,

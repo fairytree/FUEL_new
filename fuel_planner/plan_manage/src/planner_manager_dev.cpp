@@ -15,8 +15,8 @@ void FastPlannerManager::planYawActMap(const Eigen::Vector3d& start_yaw) {
   double dt_yaw = local_data_.duration_ / seg_num;  // time of B-spline segment
   const int subsp = 2;                              // subsampling factor to create yaw path
   double dt_path = dt_yaw * subsp;                  // time of yaw path segment
-  std::cout << "duration: " << local_data_.duration_ << ", seg_num: " << seg_num
-            << ", dt_yaw: " << dt_yaw << ", dt_path: " << dt_path << std::endl;
+  //std::cout << "duration: " << local_data_.duration_ << ", seg_num: " << seg_num
+            // << ", dt_yaw: " << dt_yaw << ", dt_path: " << dt_path << std::endl;
 
   Eigen::Vector3d start_yaw3d = start_yaw;
   while (start_yaw3d[0] < -M_PI)
@@ -55,7 +55,7 @@ void FastPlannerManager::planYawActMap(const Eigen::Vector3d& start_yaw) {
     waypts.emplace_back(yc, 0, 0);
   }
   spyaw[0] = start_yaw3d[0];
-  // std::cout << "discretize time: " << (ros::Time::now() - t2).toSec() <<
+  // //std::cout << "discretize time: " << (ros::Time::now() - t2).toSec() <<
   // std::endl;
 
   t2 = ros::Time::now();
@@ -100,14 +100,14 @@ void FastPlannerManager::planYawActMap(const Eigen::Vector3d& start_yaw) {
   plan_data_.dt_yaw_ = dt_yaw;
   plan_data_.dt_yaw_path_ = dt_yaw * subsp;
 
-  std::cout << "plan heading: " << (ros::Time::now() - t1).toSec() << std::endl;
+  //std::cout << "plan heading: " << (ros::Time::now() - t1).toSec() << std::endl;
   // // debug waypt error:
   // {
   //   double duration = local_data_.yaw_traj_.getTimeSum();
   //   for (int i = 0; i < path.size(); ++i) {
   //     double yt1 = local_data_.yaw_traj_.evaluateDeBoorT(i * dt_yaw * subsp)[0];
   //     double yt2 = path[i];
-  //     std::cout << "error: " << fabs(yt1 - yt2) << std::endl;
+  //     //std::cout << "error: " << fabs(yt1 - yt2) << std::endl;
   //   }
   // }
 }
@@ -119,7 +119,7 @@ void FastPlannerManager::searchFrontier(const Eigen::Vector3d& p) {
 
 void FastPlannerManager::test() {
   auto t1 = ros::Time::now();
-  std::cout << "test-------------------" << std::endl;
+  //std::cout << "test-------------------" << std::endl;
 
   Graph graph_yaw;
   int vid = 0;
@@ -133,7 +133,7 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
   double dist_to_goal = (goal - start).norm();
   if (dist_to_goal < 5.0) {
     gi = goal;
-    std::cout << "Select final gi" << std::endl;
+    //std::cout << "Select final gi" << std::endl;
   } else {
     // sample unifromly within sphere in the unknown free space
     // Do random number initialization
@@ -181,7 +181,7 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
     sensor_msgs::PointCloud2 cloud_msg;
     pcl::toROSMsg(points_cloud, cloud_msg);
 
-    std::cout << "Generate sample" << std::endl;
+    //std::cout << "Generate sample" << std::endl;
 
     // Evaluate infomation gain for each point
     vector<double> gains;  // Gains for sampled points
@@ -211,10 +211,10 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
       gains.push_back(gain);
     }
 
-    // std::cout << "Calc gain" << std::endl;
+    // //std::cout << "Calc gain" << std::endl;
 
     // for (int i = 0; i < points.size(); ++i) {
-    //   std::cout << "pt: " << points[i].transpose() << ", g: " << gains[i] <<
+    //   //std::cout << "pt: " << points[i].transpose() << ", g: " << gains[i] <<
     //   std::endl;
     // }
 
@@ -226,7 +226,7 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
     double max_score = -1;
     for (int i = 0; i < points.size(); ++i) {
       double s = we * gains[i] + wg * (dg - (goal - points[i]).norm()) / dg;
-      // std::cout << "score, gain: " << we * gains[i]
+      // //std::cout << "score, gain: " << we * gains[i]
       //           << ", goal: " << wg * (dg - (goal - points[i]).norm()) / dg <<
       //           std::endl;
       if (s > max_score) {
@@ -235,7 +235,7 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
       }
     }
     gi = points[idx];  // Selected intermediate goal
-    std::cout << "Select intermediate gi: " << gi.transpose() << std::endl;
+    //std::cout << "Select intermediate gi: " << gi.transpose() << std::endl;
 
     points_cloud.clear();
     points_cloud.points.push_back(pcl::PointXYZ(gi[0], gi[1], gi[2]));
@@ -261,7 +261,7 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
   double dt = (len / pp_.max_vel_) / seg_num;
   vector<Eigen::Vector3d> pts;
   topo_prm_->pathToGuidePts(path, seg_num + 1, pts);  // Ctrl points of Bspline
-  std::cout << "Find path" << std::endl;
+  //std::cout << "Find path" << std::endl;
   plan_data_.kino_path_ = path;
 
   // construct initial value
@@ -281,7 +281,7 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
   pts[1] = p1;
   pts[2] = p2;
 
-  std::cout << "Set boundary value" << std::endl;
+  //std::cout << "Set boundary value" << std::endl;
 
   // state_xyz.setZero();    // set end value
   // state_xyz.row(0)    = gi;
@@ -302,14 +302,14 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
   int cost_func = BsplineOptimizer::NORMAL_PHASE;
   bspline_optimizers_[0]->optimize(ctrl_pts, dt, cost_func, 1, 1);
 
-  std::cout << "Optimze" << std::endl;
+  //std::cout << "Optimze" << std::endl;
 
   // Refinement
   for (int i = 0; i < 3; ++i) {
     NonUniformBspline traj(ctrl_pts, 3, dt);
     traj.setPhysicalLimits(pp_.max_vel_, pp_.max_acc_);
     double ratio = traj.checkRatio();
-    std::cout << "ratio: " << ratio << std::endl;
+    //std::cout << "ratio: " << ratio << std::endl;
 
     dt = ratio * dt;
     states2pts << 1.0, -dt, (1 / 3.0) * dt * dt, 1.0, 0.0, -(1 / 6.0) * dt * dt, 1.0, dt,
@@ -319,8 +319,8 @@ bool FastPlannerManager::localExplore(Eigen::Vector3d start, Eigen::Vector3d sta
     bspline_optimizers_[0]->optimize(ctrl_pts, dt, cost_func, 1, 1);
   }
 
-  std::cout << "Local explore time: " << (ros::Time::now() - local_data_.start_time_).toSec()
-            << std::endl;
+  //std::cout << "Local explore time: " << (ros::Time::now() - local_data_.start_time_).toSec()
+            // << std::endl;
 
   local_data_.position_traj_.setUniformBspline(ctrl_pts, 3, dt);
   updateTrajInfo();

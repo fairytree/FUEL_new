@@ -78,7 +78,7 @@ struct perform_runge_kutta_test {
     stepper.do_step(osc(), x0, t, x1, dt);
     const double f = 2.0 * std::abs(sin(dt) - x1[0]) / std::pow(dt, o);  // upper bound
 
-    std::cout << o << " , " << f << std::endl;
+    //std::cout << o << " , " << f << std::endl;
 
     /* as long as we have errors above machine precision */
     while (f * std::pow(dt, o) > 1E-16) {
@@ -86,7 +86,7 @@ struct perform_runge_kutta_test {
       resetter<typename Stepper::stepper_category>::reset(stepper);
 
       stepper.do_step(osc(), x0, t, x1, dt);
-      std::cout << "Testing dt=" << dt << std::endl;
+      //std::cout << "Testing dt=" << dt << std::endl;
       BOOST_CHECK_LT(std::abs(sin(dt) - x1[0]), f * std::pow(dt, o));
       dt *= 0.5;
     }
@@ -109,7 +109,7 @@ struct perform_runge_kutta_error_test {
     stepper.do_step(osc(), x0, t, x1, dt, x_err);
     const double f = 2.0 * std::abs(x_err[0]) / std::pow(dt, o);
 
-    std::cout << o << " , " << f << " , " << x0[0] << std::endl;
+    //std::cout << o << " , " << f << " , " << x0[0] << std::endl;
 
     /* as long as we have errors above machine precision */
     while (f * std::pow(dt, o) > 1E-16) {
@@ -117,7 +117,7 @@ struct perform_runge_kutta_error_test {
       resetter<typename Stepper::stepper_category>::reset(stepper);
 
       stepper.do_step(osc(), x0, t, x1, dt, x_err);
-      std::cout << "Testing dt=" << dt << ": " << x_err[1] << std::endl;
+      //std::cout << "Testing dt=" << dt << ": " << x_err[1] << std::endl;
       BOOST_CHECK_SMALL(std::abs(x_err[0]), f * std::pow(dt, o));
       dt *= 0.5;
     }

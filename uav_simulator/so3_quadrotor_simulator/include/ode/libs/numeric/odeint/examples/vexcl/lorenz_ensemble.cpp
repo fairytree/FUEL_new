@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
   //[ vexcl_main
   // setup the opencl context
   vex::Context ctx(vex::Filter::Type(CL_DEVICE_TYPE_GPU));
-  std::cout << ctx << std::endl;
+  //std::cout << ctx << std::endl;
 
   // set up number of system, time step and integration time
   const size_t n = 1024 * 1024;

@@ -57,14 +57,14 @@ void TopoReplanFSM::waypointCallback(const nav_msgs::PathConstPtr& msg) {
       target_point_(0) = msg->poses[0].pose.position.x;
       target_point_(1) = msg->poses[0].pose.position.y;
       target_point_(2) = 1.0;
-      std::cout << "manual: " << target_point_.transpose() << std::endl;
+      //std::cout << "manual: " << target_point_.transpose() << std::endl;
     } else if (target_type_ == TARGET_TYPE::PRESET_TARGET) {
       target_point_(0) = waypoints_[current_wp_][0];
       target_point_(1) = waypoints_[current_wp_][1];
       target_point_(2) = waypoints_[current_wp_][2];
 
       current_wp_ = (current_wp_ + 1) % waypoint_num_;
-      std::cout << "preset: " << target_point_.transpose() << std::endl;
+      //std::cout << "preset: " << target_point_.transpose() << std::endl;
     }
 
     global_wp.push_back(target_point_);
